@@ -1,0 +1,218 @@
+/* ============================================================
+   K-FLO Landing Page — Global Styles
+   ============================================================ */
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #080d18;
+  color: #e8eaf0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ── Brand tokens ── */
+:root {
+  --navy:        #090f1e;
+  --navy-mid:    #0d1628;
+  --navy-light:  #13203a;
+  --navy-card:   #111827;
+  --red:         #e8233a;
+  --red-glow:    rgba(232,35,58,0.35);
+  --blue:        #1d6fe8;
+  --blue-glow:   rgba(29,111,232,0.35);
+  --white:       #ffffff;
+  --off-white:   #e8eaf0;
+  --muted:       #8a9ab8;
+  --border:      rgba(255,255,255,0.08);
+  --border-med:  rgba(255,255,255,0.14);
+
+  /* Map legend colors */
+  --map-blue:    #3b82f6;
+  --map-green:   #22c55e;
+  --map-orange:  #f97316;
+  --map-red:     #ef4444;
+
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+
+  --section-pad: clamp(64px, 8vw, 112px) clamp(20px, 5vw, 80px);
+  --max-w:       1180px;
+}
+
+/* ── Utility ── */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 60px);
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--red) 0%, #c01e32 100%);
+  color: #fff;
+  box-shadow: 0 4px 24px var(--red-glow);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 32px rgba(232,35,58,0.55);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid var(--border-med);
+}
+.btn-outline:hover {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.05);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  border: 1.5px solid var(--border);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+.btn-lg {
+  padding: 17px 36px;
+  font-size: 1.05rem;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Section labels ── */
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4 { line-height: 1.15; color: #fff; }
+h1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 900; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.9rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 700; }
+h4 { font-size: 1rem; font-weight: 700; }
+
+.accent-red  { color: var(--red); }
+.accent-blue { color: var(--blue); }
+.text-muted  { color: var(--muted); }
+
+/* ── Cards ── */
+.card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.card:hover {
+  border-color: var(--border-med);
+  transform: translateY(-2px);
+}
+
+/* ── Grid helpers ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ── Divider ── */
+.section-divider {
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  border-radius: 2px;
+  margin: 20px 0 28px;
+}
+
+/* ── Glow effects ── */
+.glow-red  { box-shadow: 0 0 60px -10px var(--red-glow); }
+.glow-blue { box-shadow: 0 0 60px -10px var(--blue-glow); }
+
+/* ── Badge ── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.badge-red  { background: rgba(232,35,58,0.15); color: #f87085; border: 1px solid rgba(232,35,58,0.3); }
+.badge-blue { background: rgba(29,111,232,0.15); color: #7db4ff; border: 1px solid rgba(29,111,232,0.3); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float     { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-fade-up   { animation: fade-up 0.7s ease forwards; }
+
+/* ── Noise texture overlay ── */
+.noise::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Mobile utilities ── */
+@media (max-width: 600px) {
+  h1 { font-size: 2.8rem; }
+  .btn-lg { padding: 15px 24px; font-size: 0.95rem; }
+  .section-pad { padding: 56px 20px; }
+}

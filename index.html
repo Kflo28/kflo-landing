@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#07102a" />
+
+    <!-- SEO -->
+    <title>K-FLO — Knock Smarter. Connect Better. Close More.</title>
+    <meta name="description" content="K-FLO is a guided field execution system for insurance agents. Turn leads, routes, notes, mileage, and follow-up into one clean daily production loop." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kflo.ai/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://kflo.ai/" />
+    <meta property="og:title"       content="K-FLO — Knock Smarter. Connect Better. Close More." />
+    <meta property="og:description" content="A guided field execution system that turns lead chaos into a daily production loop. Built for insurance field agents." />
+    <meta property="og:image"       content="https://kflo.ai/og-image.jpg" />
+    <meta property="og:site_name"   content="K-FLO" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="K-FLO — Field Execution System for Insurance Agents" />
+    <meta name="twitter:description" content="Knock Smarter. Connect Better. Close More. K-FLO turns your leads and territory into a guided daily production loop." />
+    <meta name="twitter:image"       content="https://kflo.ai/og-image.jpg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/jpeg" href="/k-icon.jpg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.jpg" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      Netlify Forms detection: this hidden form mirrors the React form exactly.
+      Netlify's build bot reads static HTML — it cannot parse React components,
+      so this pre-rendered copy tells Netlify the form exists and what fields to capture.
+      The React component does the actual work; this block is invisible to users.
+    -->
+    <form name="founding-access" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="founding-access" />
+      <input type="text"  name="name" />
+      <input type="email" name="email" />
+      <input type="text"  name="agency" />
+      <input type="text"  name="bot-field" />
+    </form>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
