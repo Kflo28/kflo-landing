@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // ── Asset imports ─────────────────────────────────────────────
-import heroBanner   from './assets/hero-banner-v2.jpg' // strongest current hero
+import heroBanner   from './assets/hero-banner-v4.jpg' // cropped/optimized hero
 import kSplash      from './assets/k-splash.jpg'       // K with red/blue paint splashes
 import kCircuit     from './assets/k-circuit.jpg'      // circuit board K — AI/tech sections
 import kIconDark    from './assets/k-icon-latest.jpg'  // latest K icon for nav/footer/access
@@ -129,11 +129,11 @@ function Nav() {
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : 'none',
       transition:'all 0.3s ease',
     }}>
-      <a href="#hero" style={{ display:'flex', alignItems:'center', gap:10, textDecoration:'none' }}>
-        <img src={kIconDark} alt="K-FLO" style={{ height:40, width:40, borderRadius:10, objectFit:'cover', flexShrink:0 }} />
+      <a href="#hero" style={{ display:'flex', alignItems:'center', gap:12, textDecoration:'none' }}>
+        <img src={kIconDark} alt="K-FLO" style={{ height:42, width:42, borderRadius:11, objectFit:'cover', flexShrink:0, border:'1px solid rgba(255,255,255,0.16)', boxShadow:'0 10px 24px rgba(0,0,0,0.42)' }} />
         <span style={{
           fontFamily:"'Bebas Neue','Impact',sans-serif",
-          fontSize:'1.7rem', letterSpacing:'0.08em', color:'#fff', lineHeight:1,
+          fontSize:'1.72rem', letterSpacing:'0.09em', color:'#f4f8ff', lineHeight:1, textShadow:'0 6px 18px rgba(0,0,0,0.4)',
         }}>K<span style={{ color:C.red }}>-</span>FLO</span>
       </a>
       <div className="nav-links" style={{ display:'flex', gap:28, fontSize:'0.87rem', fontWeight:600, color:C.muted }}>
@@ -168,7 +168,7 @@ function Hero() {
       <div style={{
         position:'absolute', inset:0, zIndex:0,
         backgroundImage:`url(${heroBanner})`,
-        backgroundSize:'cover', backgroundPosition:'center 30%',
+        backgroundSize:'cover', backgroundPosition:'center 26%',
         backgroundRepeat:'no-repeat',
       }} />
 
@@ -176,8 +176,8 @@ function Hero() {
       <div style={{
         position:'absolute', inset:0, zIndex:1,
         background:`
-          linear-gradient(to right, rgba(7,16,42,0.15) 0%, rgba(7,16,42,0.0) 50%),
-          linear-gradient(to top, rgba(7,16,42,0.98) 0%, rgba(7,16,42,0.3) 35%, transparent 60%)
+          linear-gradient(to right, rgba(7,16,42,0.08) 0%, rgba(7,16,42,0.0) 52%),
+          linear-gradient(to top, rgba(7,16,42,0.84) 0%, rgba(7,16,42,0.22) 36%, rgba(7,16,42,0.03) 64%)
         `,
       }} />
 
@@ -187,29 +187,6 @@ function Hero() {
         padding:'0 clamp(24px,5vw,80px)',
         paddingTop:'64vh', paddingBottom:56,
       }}>
-
-        {/* Four icon pills — matches the reference's bottom bar */}
-        <div style={{ display:'flex', gap:12, flexWrap:'wrap', marginBottom:36 }}>
-          {[
-            ['🎯','Smarter Leads'],
-            ['🔗','Stronger Connections'],
-            ['✅','Better Execution'],
-            ['📈','More Closures'],
-          ].map(([icon, label]) => (
-            <div key={label} style={{
-              display:'flex', alignItems:'center', gap:8,
-              padding:'9px 16px',
-              background:'rgba(255,255,255,0.07)',
-              border:'1px solid rgba(255,255,255,0.14)',
-              borderRadius:100,
-              fontSize:'0.85rem', fontWeight:700, color:'#fff',
-              backdropFilter:'blur(8px)',
-            }}>
-              <span style={{ fontSize:'1rem' }}>{icon}</span>
-              {label}
-            </div>
-          ))}
-        </div>
 
         {/* CTAs */}
         <div style={{ display:'flex', gap:14, flexWrap:'wrap', marginBottom:44 }}>
@@ -340,7 +317,7 @@ function Solution() {
         <div style={{ textAlign:'center', maxWidth:640, margin:'0 auto 64px' }}>
           <p style={{ fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:C.blue, marginBottom:12 }}>The System</p>
           <h2 style={{ fontSize:'clamp(1.9rem,4vw,3.2rem)', fontWeight:800, color:'#fff', marginBottom:16, lineHeight:1.15 }}>
-            K-FLO turns the day into a<br /><span style={{ color:C.blue }}>guided production loop.</span>
+            K-FLO turns your day into a<br /><span style={{ color:C.blue }}>guided production loop.</span>
           </h2>
           <div style={{ width:48, height:3, background:`linear-gradient(90deg,${C.blue},${C.red})`, borderRadius:2, margin:'0 auto' }} />
         </div>
@@ -371,10 +348,10 @@ function Solution() {
           ))}
         </div>
         <div style={{ textAlign:'center', marginTop:44 }}>
-          <p style={{ fontSize:'clamp(1.05rem,2.5vw,1.4rem)', fontWeight:900, letterSpacing:'0.03em', textTransform:'uppercase' }}>
-            <span style={{ color:C.red }}>Less Thinking.</span>
-            <span style={{ color:'#fff' }}> More Doing.</span>
-            <span style={{ color:C.blue }}> Better Results.</span>
+          <p style={{ fontSize:'clamp(1.05rem,2.5vw,1.35rem)', fontWeight:850, letterSpacing:'0.01em', color:'#ecf2ff' }}>
+            <span style={{ color:'#e8eefc' }}>Less thinking.</span>
+            <span style={{ color:'#f4f8ff' }}> More doing.</span>
+            <span style={{ color:'#ccdbf8' }}> Better results.</span>
           </p>
         </div>
       </div>
@@ -405,7 +382,7 @@ function Features() {
         <div style={{ textAlign:'center', maxWidth:620, margin:'0 auto 52px' }}>
           <p style={{ fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:C.red, marginBottom:12 }}>Features</p>
           <h2 style={{ fontSize:'clamp(1.9rem,4vw,3.2rem)', fontWeight:800, color:'#fff', lineHeight:1.15 }}>
-            Everything a field agent needs.<br /><span style={{ color:C.red }}>Nothing they don't.</span>
+            Everything needed to run the day.<br /><span style={{ color:C.blue }}>From first knock to close.</span>
           </h2>
           <div style={{ width:48, height:3, background:`linear-gradient(90deg,${C.red},${C.blue})`, borderRadius:2, margin:'20px auto 0' }} />
         </div>
@@ -516,6 +493,7 @@ function VideoPlaceholder() {
             <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
           <p style={{ color:C.muted, fontSize:'0.88rem', fontWeight:600, zIndex:1 }}>Demo video coming soon</p>
+          <p style={{ color:'rgba(128,144,176,0.8)', fontSize:'0.8rem', fontWeight:500, zIndex:1 }}>Drop in an MP4 file or embed URL when ready.</p>
         </div>
       </div>
     </section>
@@ -533,7 +511,7 @@ function ForSection() {
           {[
             {
               emoji:'🏃', eyebrow:'For Field Agents', eyebrowColor:C.blue,
-              title:'Stay in motion.',
+              title:'The next door.',
               body:'K-FLO helps agents know where to go, who to work, what to say, what to log, and what to do next — without stopping to think.',
               checks:['One app. One loop. Every day.','Guided from door to door','Notes and outcomes locked per lead','Mileage, applications, and premium auto-saved'],
               checkColor:'#22c55e',
@@ -541,7 +519,7 @@ function ForSection() {
             },
             {
               emoji:'🎯', eyebrow:'For Agency Managers', eyebrowColor:'#f87085',
-              title:'See the field clearly.',
+              title:'See what\'s working.',
               body:'Monitor production across your team. Know who\'s working leads, who\'s closing, and where your territory is underperforming.',
               checks:['Production, applications, and premium per agent','Follow-up discipline and territory coverage','Lead data quality and import health','Route activity and mileage records'],
               checkColor:C.red,
