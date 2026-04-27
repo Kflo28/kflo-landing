@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // ── Asset imports ─────────────────────────────────────────────
-import heroBanner   from './assets/hero-banner-v4.jpg' // cropped/optimized hero
+import heroBanner   from './assets/hero-banner-v5.jpg' // cropped/optimized hero (sharper)
 import kSplash      from './assets/k-splash.jpg'       // K with red/blue paint splashes
 import kCircuit     from './assets/k-circuit.jpg'      // circuit board K — AI/tech sections
 import kIconDark    from './assets/k-icon-latest.jpg'  // latest K icon for nav/footer/access
@@ -182,14 +182,13 @@ function Hero() {
       }} />
 
       {/* Content — anchored at bottom, clear of the banner's built-in text */}
-      <div style={{
+      <div className="hero-overlay-content" style={{
         position:'relative', zIndex:2, width:'100%',
         padding:'0 clamp(24px,5vw,80px)',
-        paddingTop:'64vh', paddingBottom:56,
       }}>
 
         {/* CTAs */}
-        <div style={{ display:'flex', gap:14, flexWrap:'wrap', marginBottom:44 }}>
+        <div className="hero-cta-row" style={{ display:'flex', gap:14, flexWrap:'wrap', marginBottom:44 }}>
           <a href="#access" style={{
             padding:'16px 36px', background:`linear-gradient(135deg,${C.red},#c01e32)`,
             borderRadius:12, color:'#fff', fontSize:'1rem', fontWeight:800,
@@ -212,13 +211,13 @@ function Hero() {
         </div>
 
         {/* Stats — updated to scale */}
-        <div style={{ display:'flex', gap:clamp(32,6,48), flexWrap:'wrap' }}>
+        <div className="hero-proof-row" style={{ display:'flex', gap:clamp(32,6,48), flexWrap:'wrap' }}>
           {[
             ['Pilot-Ready','Field Workflow'],
             ['Mobile-First','Daily Execution'],
             ['Human-Led','Operator Control'],
           ].map(([val,lbl]) => (
-            <div key={lbl} style={{ borderLeft:`2px solid rgba(232,35,58,0.5)`, paddingLeft:16 }}>
+            <div className="hero-proof-item" key={lbl} style={{ borderLeft:`2px solid rgba(232,35,58,0.5)`, paddingLeft:16 }}>
               <div style={{ fontSize:'clamp(1.5rem,4vw,2.2rem)', fontWeight:900, color:'#fff', lineHeight:1 }}>{val}</div>
               <div style={{ fontSize:'0.78rem', color:C.muted, fontWeight:600, marginTop:3, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div>
             </div>
@@ -317,7 +316,7 @@ function Solution() {
         <div style={{ textAlign:'center', maxWidth:640, margin:'0 auto 64px' }}>
           <p style={{ fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:C.blue, marginBottom:12 }}>The System</p>
           <h2 style={{ fontSize:'clamp(1.9rem,4vw,3.2rem)', fontWeight:800, color:'#fff', marginBottom:16, lineHeight:1.15 }}>
-            K-FLO turns your day into a<br /><span style={{ color:C.blue }}>guided production loop.</span>
+            K-FLO turns your day into<br /><span style={{ color:C.blue }}>a guided production loop.</span>
           </h2>
           <div style={{ width:48, height:3, background:`linear-gradient(90deg,${C.blue},${C.red})`, borderRadius:2, margin:'0 auto' }} />
         </div>
@@ -773,11 +772,25 @@ function ScrollTop() {
    ───────────────────────────────────────── */
 const mobileCSS = `
   :root { --section-pad: clamp(56px,8vw,100px) clamp(20px,5vw,60px); }
+  .hero-overlay-content{padding-top:69vh;padding-bottom:26px}
+  .hero-cta-row{margin-bottom:20px!important}
+  .hero-proof-row{gap:26px}
+  @media(max-width:1080px){
+    :root { --section-pad: clamp(52px,7vw,92px) clamp(18px,4.5vw,42px); }
+    .hero-overlay-content{padding-top:66vh;padding-bottom:24px}
+    .hero-cta-row{margin-bottom:16px!important}
+  }
   @media(max-width:860px){
+    :root { --section-pad: clamp(46px,7vw,84px) clamp(16px,4.5vw,26px); }
     .nav-links{display:none!important}
     .ba-grid,.map-grid,.for-grid,.intel-grid,.footer-grid{grid-template-columns:1fr!important}
     .ba-arrow{display:none!important}
     .access-form-row{grid-template-columns:1fr!important}
+    .hero-overlay-content{padding-top:58vh;padding-bottom:18px}
+    .hero-cta-row{margin-bottom:12px!important;gap:10px!important}
+    .hero-cta-row>a{flex:1 1 100%;justify-content:center!important;padding:14px 20px!important}
+    .hero-proof-row{gap:10px!important}
+    .hero-proof-item{flex:1 1 100%;padding-left:12px!important}
   }
   @font-face{}
 `
