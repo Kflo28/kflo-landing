@@ -772,13 +772,13 @@ function ScrollTop() {
    ───────────────────────────────────────── */
 const mobileCSS = `
   :root { --section-pad: clamp(56px,8vw,100px) clamp(20px,5vw,60px); }
-  .hero-overlay-content{padding-top:69vh;padding-bottom:26px}
-  .hero-cta-row{margin-bottom:20px!important}
+  .hero-overlay-content{padding-top:78vh;padding-bottom:14px}
+  .hero-cta-row{margin-bottom:12px!important}
   .hero-proof-row{gap:26px}
   @media(max-width:1080px){
     :root { --section-pad: clamp(52px,7vw,92px) clamp(18px,4.5vw,42px); }
-    .hero-overlay-content{padding-top:66vh;padding-bottom:24px}
-    .hero-cta-row{margin-bottom:16px!important}
+    .hero-overlay-content{padding-top:74vh;padding-bottom:12px}
+    .hero-cta-row{margin-bottom:10px!important}
   }
   @media(max-width:860px){
     :root { --section-pad: clamp(46px,7vw,84px) clamp(16px,4.5vw,26px); }
@@ -786,8 +786,8 @@ const mobileCSS = `
     .ba-grid,.map-grid,.for-grid,.intel-grid,.footer-grid{grid-template-columns:1fr!important}
     .ba-arrow{display:none!important}
     .access-form-row{grid-template-columns:1fr!important}
-    .hero-overlay-content{padding-top:58vh;padding-bottom:18px}
-    .hero-cta-row{margin-bottom:12px!important;gap:10px!important}
+    .hero-overlay-content{padding-top:68vh;padding-bottom:10px}
+    .hero-cta-row{margin-bottom:8px!important;gap:10px!important}
     .hero-cta-row>a{flex:1 1 100%;justify-content:center!important;padding:14px 20px!important}
     .hero-proof-row{gap:10px!important}
     .hero-proof-item{flex:1 1 100%;padding-left:12px!important}
