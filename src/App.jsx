@@ -688,6 +688,7 @@ function FoundingAccess() {
               name="founding-access"
               method="POST"
               action={NETLIFY_FORM_ENDPOINT}
+              netlify="true"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
