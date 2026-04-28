@@ -185,10 +185,14 @@ function Hero() {
       <div className="hero-overlay-content" style={{
         position:'relative', zIndex:2, width:'100%',
         padding:'0 clamp(24px,5vw,80px)',
+        minHeight:'100vh',
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'flex-end',
       }}>
 
         {/* CTAs */}
-        <div className="hero-cta-row" style={{ display:'flex', gap:14, flexWrap:'wrap', marginBottom:44 }}>
+        <div className="hero-cta-row" style={{ display:'flex', gap:14, flexWrap:'wrap', marginBottom:24 }}>
           <a href="#access" style={{
             padding:'16px 36px', background:`linear-gradient(135deg,${C.red},#c01e32)`,
             borderRadius:12, color:'#fff', fontSize:'1rem', fontWeight:800,
@@ -772,13 +776,13 @@ function ScrollTop() {
    ───────────────────────────────────────── */
 const mobileCSS = `
   :root { --section-pad: clamp(56px,8vw,100px) clamp(20px,5vw,60px); }
-  .hero-overlay-content{padding-top:78vh;padding-bottom:14px}
-  .hero-cta-row{margin-bottom:12px!important}
+  .hero-overlay-content{padding-top:0!important;padding-bottom:30px!important}
+  .hero-cta-row{margin-bottom:18px!important}
   .hero-proof-row{gap:26px}
   @media(max-width:1080px){
     :root { --section-pad: clamp(52px,7vw,92px) clamp(18px,4.5vw,42px); }
-    .hero-overlay-content{padding-top:74vh;padding-bottom:12px}
-    .hero-cta-row{margin-bottom:10px!important}
+    .hero-overlay-content{padding-top:0!important;padding-bottom:26px!important}
+    .hero-cta-row{margin-bottom:16px!important}
   }
   @media(max-width:860px){
     :root { --section-pad: clamp(46px,7vw,84px) clamp(16px,4.5vw,26px); }
@@ -786,8 +790,8 @@ const mobileCSS = `
     .ba-grid,.map-grid,.for-grid,.intel-grid,.footer-grid{grid-template-columns:1fr!important}
     .ba-arrow{display:none!important}
     .access-form-row{grid-template-columns:1fr!important}
-    .hero-overlay-content{padding-top:68vh;padding-bottom:10px}
-    .hero-cta-row{margin-bottom:8px!important;gap:10px!important}
+    .hero-overlay-content{padding-top:0!important;padding-bottom:22px!important}
+    .hero-cta-row{margin-bottom:14px!important;gap:10px!important}
     .hero-cta-row>a{flex:1 1 100%;justify-content:center!important;padding:14px 20px!important}
     .hero-proof-row{gap:10px!important}
     .hero-proof-item{flex:1 1 100%;padding-left:12px!important}
