@@ -42,7 +42,14 @@
       so this pre-rendered copy tells Netlify the form exists and what fields to capture.
       The React component does the actual work; this block is invisible to users.
     -->
-    <form name="founding-access" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <form
+      name="founding-access"
+      method="POST"
+      action="/"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
       <input type="hidden" name="form-name" value="founding-access" />
       <input type="text"  name="name" />
       <input type="email" name="email" />

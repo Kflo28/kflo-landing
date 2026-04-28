@@ -612,16 +612,32 @@ function FoundingAccess() {
     e.preventDefault()
     setSubmitting(true)
     setSendError('')
-    const data = new URLSearchParams(new FormData(e.target)).toString()
+    const form = e.currentTarget
+    const data = new URLSearchParams(new FormData(form)).toString()
+    const submitPath =
+      (typeof window !== 'undefined' && window.location && window.location.pathname
+        ? window.location.pathname
+        : '/') || '/'
     try {
-      const response = await fetch('/', {
+      const response = await fetch(submitPath, {
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded'},
         body:data,
+        credentials:'same-origin',
       })
-      if (!response.ok) throw new Error(`Request failed (${response.status})`)
+      if (!response.ok) {
+        const responseText = await response.text().catch(() => '')
+        console.error('[FoundingAccess] Netlify form submit failed', {
+          status: response.status,
+          statusText: response.statusText,
+          path: submitPath,
+          bodyPreview: responseText.slice(0, 400),
+        })
+        throw new Error(`Request failed (${response.status})`)
+      }
       setSent(true)
-    } catch {
+    } catch (error) {
+      console.error('[FoundingAccess] submit error', error)
       setSendError('We could not submit your request right now. Please retry in a moment.')
     } finally {
       setSubmitting(false)
@@ -665,10 +681,18 @@ function FoundingAccess() {
             <div style={{ padding:'36px 28px', background:'rgba(34,197,94,0.08)', border:'1px solid rgba(34,197,94,0.3)', borderRadius:20 }}>
               <div style={{ fontSize:'2.5rem', marginBottom:10 }}>✅</div>
               <h3 style={{ color:'#86efac', marginBottom:8 }}>You're on the founding list.</h3>
-              <p style={{ color:C.muted, fontSize:'0.93rem', lineHeight:1.6 }}>We received your request and will follow up as the pilot rollout queue advances.</p>
+              <p style={{ color:C.muted, fontSize:'0.93rem', lineHeight:1.6 }}>
+                We&apos;ll review your request and reach out personally.
+              </p>
             </div>
           ) : (
-            <form name="founding-access" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit}
+            <form
+              name="founding-access"
+              method="POST"
+              action="/"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
               style={{ display:'flex', flexDirection:'column', gap:13, textAlign:'left' }}>
               <input type="hidden" name="form-name" value="founding-access" />
               <p style={{ display:'none' }}><label>Don't fill this out: <input name="bot-field" /></label></p>
