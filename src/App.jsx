@@ -165,10 +165,18 @@ function Hero() {
     <section id="hero" style={{ position:'relative', minHeight:'100vh', display:'flex', alignItems:'center', overflow:'hidden' }}>
 
       {/* Full bleed hero banner */}
-      <div style={{
+      <div className="hero-bg-desktop" style={{
         position:'absolute', inset:0, zIndex:0,
         backgroundImage:`url(${heroBanner})`,
         backgroundSize:'cover', backgroundPosition:'center 26%',
+        backgroundRepeat:'no-repeat',
+      }} />
+      <div className="hero-bg-mobile" style={{
+        position:'absolute', inset:0, zIndex:0, display:'none',
+        backgroundColor:'#07143a',
+        backgroundImage:`url(${kIconDark})`,
+        backgroundSize:'min(84vw,420px) auto',
+        backgroundPosition:'center 36%',
         backgroundRepeat:'no-repeat',
       }} />
 
@@ -776,6 +784,7 @@ function ScrollTop() {
    ───────────────────────────────────────── */
 const mobileCSS = `
   :root { --section-pad: clamp(56px,8vw,100px) clamp(20px,5vw,60px); }
+  .hero-bg-mobile{display:none}
   .hero-overlay-content{padding-top:0!important;padding-bottom:30px!important}
   .hero-cta-row{margin-bottom:18px!important}
   .hero-proof-row{gap:26px}
@@ -787,6 +796,8 @@ const mobileCSS = `
   @media(max-width:860px){
     :root { --section-pad: clamp(46px,7vw,84px) clamp(16px,4.5vw,26px); }
     .nav-links{display:none!important}
+    .hero-bg-desktop{display:none!important}
+    .hero-bg-mobile{display:block!important}
     .ba-grid,.map-grid,.for-grid,.intel-grid,.footer-grid{grid-template-columns:1fr!important}
     .ba-arrow{display:none!important}
     .access-form-row{grid-template-columns:1fr!important}
