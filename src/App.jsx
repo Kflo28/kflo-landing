@@ -604,6 +604,7 @@ function Intelligence() {
    FOUNDING ACCESS
    ───────────────────────────────────────── */
 function FoundingAccess() {
+  const NETLIFY_FORM_ENDPOINT = '/founding-access.html'
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [sendError, setSendError] = useState('')
@@ -614,10 +615,7 @@ function FoundingAccess() {
     setSendError('')
     const form = e.currentTarget
     const data = new URLSearchParams(new FormData(form)).toString()
-    const submitPath =
-      (typeof window !== 'undefined' && window.location && window.location.pathname
-        ? window.location.pathname
-        : '/') || '/'
+    const submitPath = NETLIFY_FORM_ENDPOINT
     try {
       const response = await fetch(submitPath, {
         method:'POST',
@@ -689,7 +687,7 @@ function FoundingAccess() {
             <form
               name="founding-access"
               method="POST"
-              action="/"
+              action={NETLIFY_FORM_ENDPOINT}
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}

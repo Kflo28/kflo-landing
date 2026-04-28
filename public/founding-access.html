@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>K-FLO Founding Access</title>
+  </head>
+  <body>
+    <!--
+      Dedicated Netlify Forms endpoint.
+      This page exists so POST requests can target a real HTML route and avoid SPA rewrite edge-cases.
+    -->
+    <form
+      name="founding-access"
+      method="POST"
+      action="/founding-access.html"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="founding-access" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="agency" />
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>
