@@ -6,6 +6,7 @@ import kSplash      from './assets/k-splash.jpg'       // K with red/blue paint 
 import kCircuit     from './assets/k-circuit.jpg'      // circuit board K — AI/tech sections
 import kIconDark    from './assets/k-icon-latest.jpg'  // latest K icon for nav/footer/access
 import kStandalone  from './assets/k-standalone.jpg'   // K on transparent-ish bg
+import fieldDayPoster from './assets/field-day-demo-poster.jpg' // poster frame from demo MP4
 
 // ── Demo mock names (no real data) ───────────────────────────
 const DEMO_LEADS = [
@@ -482,29 +483,30 @@ function VideoPlaceholder() {
       <div style={{ maxWidth:1180, margin:'0 auto', padding:'0 clamp(20px,4vw,60px)', textAlign:'center' }}>
         <p style={{ fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:C.blue, marginBottom:12 }}>See It In Action</p>
         <h2 style={{ fontSize:'clamp(1.9rem,4vw,3rem)', fontWeight:800, color:'#fff', marginBottom:10 }}>Watch K-FLO run a field day.</h2>
-        <p style={{ color:C.muted, fontSize:'1rem', marginBottom:36 }}>From morning brief to end-of-day close — one complete loop.</p>
+        <p style={{ color:C.muted, fontSize:'1rem', marginBottom:36 }}>A 75-second walkthrough of the K-FLO field loop.</p>
         <div style={{
-          position:'relative', maxWidth:820, margin:'0 auto',
+          position:'relative', maxWidth:460, margin:'0 auto',
           borderRadius:20, overflow:'hidden',
           background:`linear-gradient(160deg,${C.navyLt},${C.navyMid})`,
           border:'1px solid rgba(255,255,255,0.12)',
-          aspectRatio:'16/9', display:'flex', flexDirection:'column',
-          alignItems:'center', justifyContent:'center', gap:16,
           boxShadow:'0 32px 80px rgba(0,0,0,0.7)',
         }}>
-          <div style={{ position:'absolute', inset:0, opacity:0.08 }}>
-            <img src={kSplash} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-          </div>
-          <div style={{
-            width:72, height:72, borderRadius:'50%', zIndex:1,
-            background:`linear-gradient(135deg,rgba(232,35,58,0.9),rgba(200,20,40,0.9))`,
-            display:'flex', alignItems:'center', justifyContent:'center',
-            boxShadow:'0 0 40px rgba(232,35,58,0.5)', cursor:'pointer',
-          }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-          </div>
-          <p style={{ color:C.muted, fontSize:'0.88rem', fontWeight:600, zIndex:1 }}>Demo video coming soon</p>
-          <p style={{ color:'rgba(128,144,176,0.8)', fontSize:'0.8rem', fontWeight:500, zIndex:1 }}>Drop in an MP4 file or embed URL when ready.</p>
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            poster={fieldDayPoster}
+            style={{
+              width:'100%',
+              aspectRatio:'9/16',
+              height:'auto',
+              display:'block',
+              background:'#050b18',
+            }}
+          >
+            <source src="/media/kflo-field-day-demo-redacted.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video playback.
+          </video>
         </div>
       </div>
     </section>
