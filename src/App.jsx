@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 // ── Asset imports ─────────────────────────────────────────────
 import heroBanner   from './assets/hero-banner-v5.jpg' // cropped/optimized hero (sharper)
@@ -6,7 +6,9 @@ import kSplash      from './assets/k-splash.jpg'       // K with red/blue paint 
 import kCircuit     from './assets/k-circuit.jpg'      // circuit board K — AI/tech sections
 import kIconDark    from './assets/k-icon-latest.jpg'  // latest K icon for nav/footer/access
 import kStandalone  from './assets/k-standalone.jpg'   // K on transparent-ish bg
-import fieldDayPoster from './assets/field-day-demo-poster.jpg' // poster frame from demo MP4
+
+const DEMO_POSTER_SRC = '/demo/kflo-demo-poster.png'
+const DEMO_VIDEO_SRC = '/demo/kflo-90-sec-demo.mp4'
 
 // ── Demo mock names (no real data) ───────────────────────────
 const DEMO_LEADS = [
@@ -474,42 +476,210 @@ function MapLegend() {
   )
 }
 
-/* ─────────────────────────────────────────
-   VIDEO PLACEHOLDER
-   ───────────────────────────────────────── */
-function VideoPlaceholder() {
+function PlayIcon({ size = 28 }) {
   return (
-    <section style={{ padding:'var(--section-pad)', background:C.navy }}>
-      <div style={{ maxWidth:1180, margin:'0 auto', padding:'0 clamp(20px,4vw,60px)', textAlign:'center' }}>
-        <p style={{ fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:C.blue, marginBottom:12 }}>See It In Action</p>
-        <h2 style={{ fontSize:'clamp(1.9rem,4vw,3rem)', fontWeight:800, color:'#fff', marginBottom:10 }}>Watch K-FLO run a field day.</h2>
-        <p style={{ color:C.muted, fontSize:'1rem', marginBottom:36 }}>A 75-second walkthrough of the K-FLO field loop.</p>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l10.98-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14Z" />
+    </svg>
+  )
+}
+
+function CloseIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  )
+}
+
+function DemoVideoModal({ open, onClose }) {
+  const videoRef = useRef(null)
+
+  const closeModal = () => {
+    const video = videoRef.current
+    if (video) {
+      video.pause()
+      try {
+        video.currentTime = 0
+      } catch {
+        // Ignore reset failures while the media element is unloading.
+      }
+    }
+    onClose()
+  }
+
+  useEffect(() => {
+    if (!open) return
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') closeModal()
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  if (!open) return null
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="K-FLO 90-second demo video"
+      onMouseDown={event => {
+        if (event.target === event.currentTarget) closeModal()
+      }}
+      style={{
+        position:'fixed', inset:0, zIndex:2000,
+        display:'flex', alignItems:'center', justifyContent:'center',
+        padding:'clamp(16px,4vw,34px)',
+        background:'rgba(3,8,16,0.88)', backdropFilter:'blur(14px)',
+      }}
+    >
+      <div style={{ width:'min(430px,94vw)', maxHeight:'100%', display:'flex', flexDirection:'column', alignItems:'center' }}>
+        <button
+          type="button"
+          onClick={closeModal}
+          aria-label="Close demo video"
+          style={{
+            width:46, height:46, marginBottom:12, borderRadius:'50%',
+            border:'1px solid rgba(255,255,255,0.22)', background:'rgba(255,255,255,0.10)',
+            color:'#fff', display:'flex', alignItems:'center', justifyContent:'center',
+            cursor:'pointer', boxShadow:'0 14px 34px rgba(0,0,0,0.35)',
+          }}
+        >
+          <CloseIcon />
+        </button>
         <div style={{
-          position:'relative', maxWidth:460, margin:'0 auto',
-          borderRadius:20, overflow:'hidden',
-          background:`linear-gradient(160deg,${C.navyLt},${C.navyMid})`,
-          border:'1px solid rgba(255,255,255,0.12)',
-          boxShadow:'0 32px 80px rgba(0,0,0,0.7)',
+          width:'100%', overflow:'hidden', borderRadius:28, padding:8,
+          background:'#030810', border:'1px solid rgba(255,255,255,0.16)',
+          boxShadow:'0 34px 90px rgba(0,0,0,0.72)',
         }}>
           <video
+            ref={videoRef}
             controls
             playsInline
             preload="metadata"
-            poster={fieldDayPoster}
+            poster={DEMO_POSTER_SRC}
             style={{
               width:'100%',
               aspectRatio:'9/16',
-              height:'auto',
+              maxHeight:'82vh',
               display:'block',
+              objectFit:'contain',
+              borderRadius:22,
               background:'#050b18',
             }}
           >
-            <source src="/media/kflo-field-day-demo-redacted.mp4" type="video/mp4" />
+            <source src={DEMO_VIDEO_SRC} type="video/mp4" />
             Your browser does not support HTML5 video playback.
           </video>
         </div>
       </div>
+    </div>
+  )
+}
+
+/* ─────────────────────────────────────────
+   VIDEO DEMO
+   ───────────────────────────────────────── */
+function VideoPlaceholder({ onOpenDemo }) {
+  return (
+    <section id="demo" style={{ padding:'var(--section-pad)', background:C.navy }}>
+      <div style={{ maxWidth:1180, margin:'0 auto', padding:'0 clamp(20px,4vw,60px)', textAlign:'center' }}>
+        <p style={{ fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:C.blue, marginBottom:12 }}>See It In Action</p>
+        <h2 style={{ fontSize:'clamp(1.9rem,4vw,3rem)', fontWeight:800, color:'#fff', marginBottom:10 }}>Watch K-FLO run a field day.</h2>
+        <p style={{ color:C.muted, fontSize:'1rem', marginBottom:8 }}>A 90-second walkthrough of the K-FLO field loop.</p>
+        <p style={{ color:'rgba(244,248,255,0.72)', fontSize:'0.88rem', fontWeight:700, marginBottom:36 }}>Powered by Lead Sentinel Intelligence</p>
+        <div style={{
+          position:'relative', maxWidth:430, margin:'0 auto',
+          borderRadius:30, overflow:'hidden', padding:8,
+          background:`linear-gradient(160deg,${C.navyLt},${C.navyMid})`,
+          border:'1px solid rgba(255,255,255,0.12)',
+          boxShadow:'0 32px 80px rgba(0,0,0,0.7)',
+        }}>
+          <button
+            type="button"
+            onClick={onOpenDemo}
+            aria-label="Watch 90-second K-FLO demo"
+            style={{
+              position:'relative',
+              width:'100%',
+              border:0,
+              padding:0,
+              cursor:'pointer',
+              overflow:'hidden',
+              borderRadius:22,
+              background:'#050b18',
+              display:'block',
+            }}
+          >
+            <img
+              src={DEMO_POSTER_SRC}
+              alt="K-FLO 90-second demo poster"
+              style={{
+                width:'100%',
+                aspectRatio:'9/16',
+                display:'block',
+                objectFit:'cover',
+              }}
+            />
+            <span style={{
+              position:'absolute', inset:0,
+              background:'linear-gradient(180deg,rgba(7,16,42,0.08),rgba(7,16,42,0.38))',
+            }} />
+            <span style={{
+              position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)',
+              width:72, height:72, borderRadius:'50%',
+              display:'flex', alignItems:'center', justifyContent:'center',
+              color:'#fff', background:`linear-gradient(135deg,${C.red},#c01e32)`,
+              border:'1px solid rgba(255,255,255,0.42)',
+              boxShadow:'0 18px 46px rgba(232,35,58,0.42)',
+            }}>
+              <span style={{ marginLeft:4, display:'flex' }}><PlayIcon /></span>
+            </span>
+          </button>
+        </div>
+        <a href="#access" style={{
+          display:'inline-flex', alignItems:'center', justifyContent:'center',
+          marginTop:24, padding:'14px 28px', borderRadius:12,
+          color:'#fff', fontWeight:800, textDecoration:'none',
+          background:`linear-gradient(135deg,${C.red},#c01e32)`,
+          boxShadow:'0 8px 28px rgba(232,35,58,0.38)',
+        }}>
+          Request Pilot Access
+        </a>
+      </div>
     </section>
+  )
+}
+
+function MobileDemoButton({ visible, onClick }) {
+  if (!visible) return null
+  return (
+    <button
+      type="button"
+      className="mobile-demo-button"
+      onClick={onClick}
+      aria-label="Watch 90-second K-FLO demo"
+      style={{
+        position:'fixed', left:'50%', transform:'translateX(-50%)',
+        bottom:'calc(env(safe-area-inset-bottom, 0px) + 16px)',
+        zIndex:1100, alignItems:'center', gap:8,
+        padding:'13px 20px', borderRadius:999,
+        color:'#fff', fontSize:'0.92rem', fontWeight:900,
+        border:'1px solid rgba(255,255,255,0.18)',
+        background:`linear-gradient(135deg,${C.red},#c01e32)`,
+        boxShadow:'0 16px 44px rgba(232,35,58,0.42)',
+        cursor:'pointer',
+      }}
+    >
+      <PlayIcon size={17} />
+      Watch 90-Second Demo
+    </button>
   )
 }
 
@@ -605,7 +775,7 @@ function Intelligence() {
 /* ─────────────────────────────────────────
    FOUNDING ACCESS
    ───────────────────────────────────────── */
-function FoundingAccess() {
+function FoundingAccess({ accessRef }) {
   const NETLIFY_FORM_ENDPOINT = '/founding-access.html'
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -645,7 +815,7 @@ function FoundingAccess() {
   }
 
   return (
-    <section id="access" style={{
+    <section ref={accessRef} id="access" style={{
       padding:'var(--section-pad)',
       background:`linear-gradient(160deg,#070e20 0%,${C.navyMid} 50%,#050b18 100%)`,
       position:'relative', overflow:'hidden',
@@ -748,7 +918,7 @@ function Footer() {
               <span style={{ fontFamily:"'Bebas Neue','Impact',sans-serif", fontSize:'1.6rem', letterSpacing:'0.07em', color:'#fff', lineHeight:1 }}>K<span style={{ color:C.red }}>-</span>FLO</span>
             </div>
             <p style={{ color:C.muted, fontSize:'0.87rem', lineHeight:1.7, maxWidth:280, marginBottom:12 }}>Knock Smarter. Connect Better. Close More.</p>
-            <p style={{ fontSize:'0.77rem', color:'rgba(138,154,184,0.55)', fontStyle:'italic' }}>Powered by Lead Sentinel</p>
+            <p style={{ fontSize:'0.77rem', color:'rgba(138,154,184,0.55)', fontStyle:'italic' }}>Powered by Lead Sentinel Intelligence</p>
           </div>
           <div>
             <p style={{ fontSize:'0.74rem', fontWeight:800, letterSpacing:'0.12em', textTransform:'uppercase', color:C.muted, marginBottom:14 }}>Product</p>
@@ -809,6 +979,7 @@ function ScrollTop() {
    ───────────────────────────────────────── */
 const mobileCSS = `
   :root { --section-pad: clamp(56px,8vw,100px) clamp(20px,5vw,60px); }
+  .mobile-demo-button{display:none!important}
   .hero-bg-mobile{display:none}
   .hero-overlay-content{padding-top:0!important;padding-bottom:30px!important}
   .hero-cta-row{margin-bottom:18px!important}
@@ -819,6 +990,7 @@ const mobileCSS = `
     .hero-cta-row{margin-bottom:16px!important}
   }
   @media(max-width:860px){
+    .mobile-demo-button{display:inline-flex!important}
     :root { --section-pad: clamp(46px,7vw,84px) clamp(16px,4.5vw,26px); }
     .nav-links{display:none!important}
     .hero-bg-desktop{display:none!important}
@@ -839,6 +1011,29 @@ const mobileCSS = `
    APP
    ───────────────────────────────────────── */
 export default function App() {
+  const [demoModalOpen, setDemoModalOpen] = useState(false)
+  const [showMobileDemo, setShowMobileDemo] = useState(false)
+  const [accessInView, setAccessInView] = useState(false)
+  const accessRef = useRef(null)
+
+  useEffect(() => {
+    const updateMobileDemo = () => setShowMobileDemo(window.scrollY > 180)
+    updateMobileDemo()
+    window.addEventListener('scroll', updateMobileDemo, { passive:true })
+    return () => window.removeEventListener('scroll', updateMobileDemo)
+  }, [])
+
+  useEffect(() => {
+    const node = accessRef.current
+    if (!node || typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver(
+      ([entry]) => setAccessInView(Boolean(entry?.isIntersecting)),
+      { threshold:0.05, rootMargin:'0px 0px -12% 0px' }
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <style>{mobileCSS}</style>
@@ -849,13 +1044,18 @@ export default function App() {
         <Solution />
         <Features />
         <MapLegend />
-        <VideoPlaceholder />
+        <VideoPlaceholder onOpenDemo={() => setDemoModalOpen(true)} />
         <ForSection />
         <Intelligence />
-        <FoundingAccess />
+        <FoundingAccess accessRef={accessRef} />
       </main>
       <Footer />
       <ScrollTop />
+      <MobileDemoButton
+        visible={showMobileDemo && !demoModalOpen && !accessInView}
+        onClick={() => setDemoModalOpen(true)}
+      />
+      <DemoVideoModal open={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
     </>
   )
 }
