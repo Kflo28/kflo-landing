@@ -776,39 +776,87 @@ function Intelligence() {
    FOUNDING ACCESS
    ───────────────────────────────────────── */
 function FoundingAccess({ accessRef }) {
+  const PILOT_ACCESS_ENDPOINT = 'https://app.kflo.ai/.netlify/functions/pilot-access-request'
   const NETLIFY_FORM_ENDPOINT = '/founding-access.html'
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [sendError, setSendError] = useState('')
+
+  const getFormValue = (form, name) => String(new FormData(form).get(name) || '').trim()
+
+  const submitNetlifyFallback = async (form) => {
+    const data = new URLSearchParams(new FormData(form)).toString()
+    const response = await fetch(NETLIFY_FORM_ENDPOINT, {
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:data,
+      credentials:'same-origin',
+    })
+    if (!response.ok) {
+      const responseText = await response.text().catch(() => '')
+      console.error('[FoundingAccess] Netlify form fallback failed', {
+        status: response.status,
+        statusText: response.statusText,
+        path: NETLIFY_FORM_ENDPOINT,
+        bodyPreview: responseText.slice(0, 400),
+      })
+      throw new Error(`Fallback request failed (${response.status})`)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSubmitting(true)
     setSendError('')
     const form = e.currentTarget
-    const data = new URLSearchParams(new FormData(form)).toString()
-    const submitPath = NETLIFY_FORM_ENDPOINT
+    if (getFormValue(form, 'bot-field')) {
+      setSent(true)
+      setSubmitting(false)
+      return
+    }
+
+    const payload = {
+      name: getFormValue(form, 'name'),
+      email: getFormValue(form, 'email').toLowerCase(),
+      company: getFormValue(form, 'agency'),
+      agency: getFormValue(form, 'agency'),
+      source: 'kflo.ai',
+      source_url: window.location.href,
+      landing_url: window.location.href,
+      referrer: document.referrer || '',
+      user_agent: navigator.userAgent || '',
+      submitted_at: new Date().toISOString(),
+    }
+
     try {
-      const response = await fetch(submitPath, {
+      const response = await fetch(PILOT_ACCESS_ENDPOINT, {
         method:'POST',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:data,
-        credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload),
       })
-      if (!response.ok) {
-        const responseText = await response.text().catch(() => '')
-        console.error('[FoundingAccess] Netlify form submit failed', {
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok || result?.ok === false) {
+        console.error('[FoundingAccess] pilot access request failed', {
           status: response.status,
           statusText: response.statusText,
-          path: submitPath,
-          bodyPreview: responseText.slice(0, 400),
+          path: PILOT_ACCESS_ENDPOINT,
+          result,
         })
         throw new Error(`Request failed (${response.status})`)
       }
+      if (result?.notification_sent === false) {
+        console.warn('[FoundingAccess] request stored, admin notification needs review', result)
+      }
       setSent(true)
     } catch (error) {
-      console.error('[FoundingAccess] submit error', error)
-      setSendError('We could not submit your request right now. Please retry in a moment.')
+      console.error('[FoundingAccess] canonical submit error', error)
+      try {
+        await submitNetlifyFallback(form)
+        setSent(true)
+      } catch (fallbackError) {
+        console.error('[FoundingAccess] submit error', fallbackError)
+        setSendError('We could not submit your request right now. Please retry in a moment.')
+      }
     } finally {
       setSubmitting(false)
     }
