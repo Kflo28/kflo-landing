@@ -1,11 +1,17 @@
-import kIcon from './assets/k-icon-latest.jpg'
-import kLogo from './assets/kflo-logo.jpg'
+import kIcon from './assets/kflo-ai-coin.webp'
+import platformBoard from './assets/kflo-ai-operations-platform-board.webp'
+import platformHeader from './assets/kflo-ai-platform-header.webp'
+import recoveryCoin from './assets/kflo-recovery-coin.webp'
+import roofCoin from './assets/kflo-roof-coin.webp'
+import coverageCoin from './assets/kflo-coverage-coin.webp'
+import grantsCoin from './assets/kflo-grants-coin.webp'
 
 const AUDIT_URL = 'mailto:ryan@savageandsoul.com?subject=K-FLO%20Workflow%20Audit'
 const APP_URL = 'https://app.kflo.ai/#/auth'
-const RECOV_URL = 'https://rph.kflo.ai'
-const ROOF_URL = 'https://roof.kflo.ai/#/auth'
-const CLAIM_URL = 'https://insurance.kflo.ai/#/auth'
+const RECOVERY_URL = 'https://rph.kflo.ai'
+const ROOF_URL = 'https://roof.kflo.ai'
+const COVERAGE_URL = 'https://insurance.kflo.ai'
+const GRANTS_URL = 'https://rph.kflo.ai'
 
 const workCards = [
   {
@@ -28,36 +34,40 @@ const workCards = [
 
 const verticals = [
   {
-    name: 'K-FLO',
-    label: 'Field Execution Systems',
-    line: 'Automate. Optimize. Deliver.',
-    text: 'For teams that need leads, tasks, follow-ups, dashboards, and field movement handled in one clean system.',
+    name: 'K-FLO Recovery',
+    label: 'Operations',
+    line: 'Housing • Compliance • Funding',
+    text: 'Manage recovery housing operations, resident workflows, compliance readiness, inspections, grants, funder reporting, and oversight visibility.',
     color: 'blue',
-    href: APP_URL,
+    href: RECOVERY_URL,
+    image: recoveryCoin,
   },
   {
-    name: 'RECOV-FLO',
-    label: 'Recovery Housing Operations',
-    line: 'Compliance. Oversight. Reporting.',
-    text: 'For recovery housing, sober living, reentry, and care-flow operations that need resident tracking, documentation, grants, inspections, and accountability.',
-    color: 'violet',
-    href: RECOV_URL,
-  },
-  {
-    name: 'ROOF-FLO',
-    label: 'Roofing Lead Execution',
-    line: 'Knock. Inspect. Close.',
-    text: 'For roofing teams managing canvassing, inspections, estimates, follow-up, and job pipeline movement.',
+    name: 'K-FLO Roof',
+    label: 'Operations',
+    line: 'Crews • Jobs • Projects',
+    text: 'Streamline roofing crews, jobs, inspections, estimates, project movement, follow-up, and field accountability from one operating lane.',
     color: 'red',
     href: ROOF_URL,
+    image: roofCoin,
   },
   {
-    name: 'INSURE-FLO',
-    label: 'Insurance Field Execution',
-    line: 'Know the Next Door to Knock.',
-    text: 'For insurance field agents and teams using smarter territory targeting, lead routing, follow-up tracking, and neighborhood-level insight to find better prospects and close more policies.',
+    name: 'K-FLO Coverage',
+    label: 'Operations',
+    line: 'Inspect • Document • Resolve',
+    text: 'Capture field activity, verify documentation, manage claim and coverage workflows, and keep resolution work moving with cleaner ownership.',
+    color: 'gold',
+    href: COVERAGE_URL,
+    image: coverageCoin,
+  },
+  {
+    name: 'K-FLO Grants & Funding',
+    label: 'Operations',
+    line: 'Compliance • Grants • Reporting',
+    text: 'Track funding readiness, grant deliverables, reporting evidence, oversight dashboards, and funder confidence before deadlines turn into fires.',
     color: 'green',
-    href: CLAIM_URL,
+    href: GRANTS_URL,
+    image: grantsCoin,
   },
 ]
 
@@ -102,61 +112,10 @@ function Nav() {
   )
 }
 
-function DashboardMock() {
+function PlatformBrandBoard() {
   return (
-    <div className="dashboard-shell" aria-label="K-FLO dashboard preview">
-      <div className="dash-top">
-        <div>
-          <span className="eyebrow">Command Center</span>
-          <h3>Live Flow Control</h3>
-        </div>
-        <div className="status-pill">SYSTEM ONLINE</div>
-      </div>
-      <div className="metric-grid">
-        {[
-          ['247', 'New Leads', '+18%'],
-          ['89', 'Tasks Routed', '+12%'],
-          ['37', 'Follow-Ups', 'Due today'],
-          ['23', 'Clean Outcomes', '+6%'],
-        ].map(([value, label, change]) => (
-          <div className="metric" key={label}>
-            <strong>{value}</strong>
-            <span>{label}</span>
-            <em>{change}</em>
-          </div>
-        ))}
-      </div>
-      <div className="dash-body">
-        <div className="flow-panel">
-          <div className="panel-title">Lead Flow</div>
-          <div className="chart-line">
-            <i style={{ height: '22%' }} />
-            <i style={{ height: '44%' }} />
-            <i style={{ height: '36%' }} />
-            <i style={{ height: '58%' }} />
-            <i style={{ height: '51%' }} />
-            <i style={{ height: '73%' }} />
-            <i style={{ height: '66%' }} />
-            <i style={{ height: '86%' }} />
-          </div>
-        </div>
-        <div className="queue-panel">
-          <div className="panel-title">Follow-Up Queue</div>
-          {['Hot leads', 'Appointment set', 'Needs documents', 'Report overdue'].map((item, index) => (
-            <div className="queue-row" key={item}>
-              <span>{item}</span>
-              <strong>{[32, 11, 28, 7][index]}</strong>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="node-map">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
+    <div className="platform-board-shell" aria-label="K-FLO AI Operations Platform brand board">
+      <img src={platformBoard} alt="K-FLO AI Operations Platform with Recovery, Roof, Coverage, and Grants verticals" />
     </div>
   )
 }
@@ -166,10 +125,10 @@ function Hero() {
     <section id="top" className="hero section">
       <div className="hero-copy">
         <div className="signal-line">Powered by Savage & Soul</div>
-        <h1>Turn Chaos Into Field Execution.</h1>
+        <h1>K-FLO AI Operations Platform.</h1>
         <p>
-          K-FLO builds AI-assisted workflow systems that help teams capture leads, route tasks,
-          automate follow-up, track outcomes, and keep every moving part visible.
+          One platform family for the work that has to move: recovery housing, roofing,
+          coverage workflows, grants, reporting, compliance, and field execution.
         </p>
         <div className="hero-actions">
           <a className="primary-btn big" href={AUDIT_URL}>Book a Workflow Audit</a>
@@ -181,7 +140,7 @@ function Hero() {
           <span>Deliver.</span>
         </div>
       </div>
-      <DashboardMock />
+      <PlatformBrandBoard />
     </section>
   )
 }
@@ -212,13 +171,13 @@ function VerticalSystems() {
     <section className="section systems" id="systems">
       <div className="section-head">
         <span className="eyebrow">Vertical Systems</span>
-        <h2>One platform family. Multiple operating lanes.</h2>
-        <p>Each vertical keeps the same execution spine: intake, routing, follow-up, documentation, visibility, reporting.</p>
+        <h2>One platform. Every operation.</h2>
+        <p>Each vertical keeps the same execution spine: intake, routing, documents, follow-up, visibility, reporting, and accountability.</p>
       </div>
       <div className="vertical-grid">
         {verticals.map((item) => (
           <a className={`vertical-card ${item.color}`} href={item.href} key={item.name}>
-            <div className="vertical-mark">{item.name.slice(0, 1)}</div>
+            <img className="vertical-coin" src={item.image} alt="" />
             <span>{item.label}</span>
             <h3>{item.name}</h3>
             <strong>{item.line}</strong>
@@ -291,7 +250,7 @@ function SavageSoul() {
             stronger accountability, and better outcomes.
           </p>
         </div>
-        <img src={kLogo} alt="K-FLO logo" />
+        <img src={platformHeader} alt="K-FLO AI Operations Platform" />
       </div>
     </section>
   )
@@ -340,7 +299,7 @@ const css = `
     --silver: #d7dee8;
     --muted: #8e9bb3;
     --green: #42e38d;
-    --violet: #8b7cff;
+    --gold: #f1c84b;
   }
 
   * { box-sizing: border-box; }
@@ -516,8 +475,8 @@ const css = `
   h1 {
     max-width: 850px;
     margin-top: 22px;
-    font-size: clamp(3.3rem, 8.7vw, 8.4rem);
-    line-height: .82;
+    font-size: clamp(3rem, 7.2vw, 7.1rem);
+    line-height: .86;
     letter-spacing: -.07em;
     text-transform: uppercase;
     font-weight: 1000;
@@ -572,6 +531,39 @@ const css = `
     letter-spacing: .08em;
     text-transform: uppercase;
     font-size: .78rem;
+  }
+
+  .platform-board-shell {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(103,189,255,.24);
+    background:
+      linear-gradient(145deg, rgba(8,13,22,.96), rgba(2,4,8,.92)),
+      radial-gradient(circle at 20% 0%, rgba(23,139,255,.22), transparent 18rem);
+    border-radius: 30px;
+    padding: clamp(10px, 1.5vw, 18px);
+    box-shadow: 0 50px 120px rgba(0,0,0,.58), 0 0 70px rgba(23,139,255,.16);
+  }
+
+  .platform-board-shell:before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.18), transparent 24%, rgba(23,139,255,.2) 54%, transparent 78%),
+      radial-gradient(circle at 78% 18%, rgba(103,189,255,.20), transparent 18rem);
+    opacity: .7;
+    mix-blend-mode: screen;
+  }
+
+  .platform-board-shell img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 22px;
   }
 
   .dashboard-shell {
@@ -830,7 +822,19 @@ const css = `
   .vertical-card.blue { color: var(--blue); }
   .vertical-card.red { color: var(--red); }
   .vertical-card.green { color: var(--green); }
-  .vertical-card.violet { color: var(--violet); }
+  .vertical-card.gold { color: var(--gold); }
+
+  .vertical-coin {
+    position: relative;
+    z-index: 1;
+    width: 112px;
+    height: 112px;
+    display: block;
+    margin-bottom: 22px;
+    border-radius: 999px;
+    object-fit: cover;
+    filter: drop-shadow(0 0 22px color-mix(in srgb, currentColor, transparent 68%));
+  }
 
   .vertical-mark {
     position: relative;
@@ -1010,8 +1014,9 @@ const css = `
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .dashboard-shell {
-      min-height: 480px;
+    .platform-board-shell {
+      max-width: 780px;
+      margin: 0 auto;
     }
   }
 
@@ -1048,9 +1053,8 @@ const css = `
       grid-template-columns: 1fr;
     }
 
-    .dashboard-shell {
-      min-height: auto;
-      padding: 20px;
+    .platform-board-shell {
+      padding: 8px;
       border-radius: 24px;
     }
 
