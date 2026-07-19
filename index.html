@@ -5,27 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#03050a" />
 
-    <!-- SEO -->
     <title>K-FLO — AI Operations Platform</title>
-    <meta name="description" content="K-FLO is an AI operations platform for Recovery, Roof, Coverage, and Grants & Funding workflows. Manage, monitor, measure, and transform operational work." />
+    <meta name="description" content="K-FLO is a multi-vertical AI operations platform for Recovery, Behavioral Health, Roof, Coverage, and Grants & Funding workflows." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://kflo.ai/" />
 
-    <!-- Open Graph -->
-    <meta property="og:type"        content="website" />
-    <meta property="og:url"         content="https://kflo.ai/" />
-    <meta property="og:title"       content="K-FLO — AI Operations Platform" />
-    <meta property="og:description" content="One platform family for Recovery, Roof, Coverage, and Grants & Funding operations." />
-    <meta property="og:image"       content="https://kflo.ai/kflo-platform-og.png" />
-    <meta property="og:site_name"   content="K-FLO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kflo.ai/" />
+    <meta property="og:title" content="K-FLO — One Platform. Every Operation." />
+    <meta property="og:description" content="Recovery, Behavioral Health, Roof, Coverage, and Grants & Funding under one K-FLO platform family." />
+    <meta property="og:image" content="https://kflo.ai/kflo-platform-og.png" />
+    <meta property="og:site_name" content="K-FLO" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="K-FLO — AI Operations Platform" />
-    <meta name="twitter:description" content="Recovery, Roof, Coverage, and Grants & Funding operations under one K-FLO platform family." />
-    <meta name="twitter:image"       content="https://kflo.ai/kflo-platform-og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="K-FLO — One Platform. Every Operation." />
+    <meta name="twitter:description" content="AI-powered workflow, compliance, coordination, funding visibility, and live reporting across five K-FLO verticals." />
+    <meta name="twitter:image" content="https://kflo.ai/kflo-platform-og.png" />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
@@ -38,26 +34,12 @@
   <body>
     <div id="root"></div>
 
-    <!--
-      Netlify Forms detection: this hidden form mirrors the React form exactly.
-      Netlify's build bot reads static HTML — it cannot parse React components,
-      so this pre-rendered copy tells Netlify the form exists and what fields to capture.
-      The React component does the actual work; this block is invisible to users.
-    -->
-    <form
-      name="founding-access"
-      method="POST"
-      action="/founding-access.html"
-      netlify
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      hidden
-    >
+    <form name="founding-access" method="POST" action="/founding-access.html" netlify data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="founding-access" />
-      <input type="text"  name="name" />
+      <input type="text" name="name" />
       <input type="email" name="email" />
-      <input type="text"  name="agency" />
-      <input type="text"  name="bot-field" />
+      <input type="text" name="agency" />
+      <input type="text" name="bot-field" />
     </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
