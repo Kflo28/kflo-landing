@@ -1,0 +1,17 @@
+.k2-bh-callout > img.k2-coin {
+  width: min(100%, 320px);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 35px rgba(23, 139, 255, 0.3));
+}
+
+.k2-bh-callout {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(23, 139, 255, 0.06), rgba(23, 139, 255, 0.015));
+}
+
+.k2-card.blue {
+  border-color: rgba(23, 139, 255, 0.36);
+  box-shadow: 0 22px 60px rgba(23, 139, 255, 0.08), inset 0 1px rgba(255,255,255,.07);
+}
