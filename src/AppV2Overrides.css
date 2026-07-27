@@ -15,3 +15,81 @@
   border-color: rgba(23, 139, 255, 0.36);
   box-shadow: 0 22px 60px rgba(23, 139, 255, 0.08), inset 0 1px rgba(255,255,255,.07);
 }
+
+/* Give every vertical enough room to show its coin at the full, uncropped aspect ratio. */
+.k2-vertical-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1320px;
+}
+
+.k2-vertical-grid > .k2-card {
+  grid-column: span 2;
+  min-height: 410px;
+}
+
+.k2-vertical-grid > .k2-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.k2-vertical-grid > .k2-card:nth-child(5) {
+  grid-column: 4 / span 2;
+}
+
+.k2-coin-stage {
+  min-height: 166px;
+  display: grid;
+  place-items: center;
+  margin: -2px 0 18px;
+  overflow: visible;
+}
+
+.k2-card .k2-coin-stage > .k2-coin {
+  width: min(154px, 100%);
+  height: auto;
+  max-height: 154px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  margin: 0;
+}
+
+/* The original Grants export includes off-center canvas and stray text below the coin. */
+.k2-card.green .k2-coin-stage {
+  width: 154px;
+  min-height: 154px;
+  height: 154px;
+  margin: 4px auto 26px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #020508;
+}
+
+.k2-card.green .k2-coin-stage > .k2-coin {
+  width: 170px;
+  max-width: none;
+  max-height: none;
+  transform: translate(10px, 2px);
+}
+
+@media (max-width: 900px) {
+  .k2-vertical-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .k2-vertical-grid > .k2-card,
+  .k2-vertical-grid > .k2-card:nth-child(4),
+  .k2-vertical-grid > .k2-card:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .k2-vertical-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .k2-vertical-grid > .k2-card {
+    min-height: 0;
+  }
+}

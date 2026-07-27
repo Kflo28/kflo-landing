@@ -87,7 +87,20 @@ export default function AppV2() {
         <section className="k2-section" id="verticals">
           <div className="k2-section-head"><span className="k2-eyebrow">The K-FLO Platform Family</span><h2>Different missions. One execution spine.</h2><p>Recovery leads the way today. Each K-FLO vertical keeps its own vocabulary, workflows, permissions, and reporting while sharing the same operating intelligence underneath.</p></div>
           <div className="k2-vertical-grid">
-            {verticals.map((v) => <a className={`k2-card ${v.color}`} href={v.href} key={v.name}>{v.custom ? <BehavioralCoin className="k2-coin"/> : <img className="k2-coin" src={v.image} alt=""/>}<span>OPERATIONS</span><h3>{v.name}</h3><strong>{v.line}</strong><p>{v.text}</p>{v.badge && <b>{v.badge}</b>}</a>)}
+            {verticals.map((v) => (
+              <a className={`k2-card ${v.color}`} href={v.href} key={v.name}>
+                <div className="k2-coin-stage">
+                  {v.custom
+                    ? <BehavioralCoin className="k2-coin"/>
+                    : <img className="k2-coin" src={v.image} alt={`${v.name} coin`}/>}
+                </div>
+                <span>OPERATIONS</span>
+                <h3>{v.name}</h3>
+                <strong>{v.line}</strong>
+                <p>{v.text}</p>
+                {v.badge && <b>{v.badge}</b>}
+              </a>
+            ))}
           </div>
         </section>
 
