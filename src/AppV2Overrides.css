@@ -5,6 +5,16 @@
   filter: drop-shadow(0 0 35px rgba(23, 139, 255, 0.3));
 }
 
+.k2-brand img {
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 11px;
+  background: #020814;
+}
+
 .k2-bh-callout {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);

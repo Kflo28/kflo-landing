@@ -1,4 +1,4 @@
-import kIcon from './assets/kflo-ai-coin.webp'
+import kIcon from './assets/k-icon-latest.jpg'
 import platformHeader from './assets/kflo-ai-platform-header.webp'
 import recoveryCoin from './assets/kflo-recovery-coin.webp'
 import roofCoin from './assets/kflo-roof-coin.webp'
