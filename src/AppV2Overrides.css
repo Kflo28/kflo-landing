@@ -5,15 +5,28 @@
   filter: drop-shadow(0 0 35px rgba(23, 139, 255, 0.3));
 }
 
-.k2-brand img {
-  width: 44px;
-  height: 44px;
+.k2-brand.k2-brand-wordmark {
+  width: 190px;
+  line-height: 0;
+  letter-spacing: normal;
+}
+
+.k2-brand.k2-brand-wordmark img {
+  display: block;
+  width: 190px;
+  height: auto;
+  max-height: 55px;
   padding: 0;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  border-radius: 50%;
+  border-radius: 10px;
   background: #020814;
-  box-shadow: 0 0 28px rgba(23, 139, 255, 0.28);
+  box-shadow: 0 0 30px rgba(23, 139, 255, 0.16);
+}
+
+.k2-footer .k2-brand.k2-brand-wordmark,
+.k2-footer .k2-brand.k2-brand-wordmark img {
+  width: 164px;
 }
 
 .k2-bh-callout {
@@ -94,6 +107,11 @@
 }
 
 @media (max-width: 620px) {
+  .k2-brand.k2-brand-wordmark,
+  .k2-brand.k2-brand-wordmark img {
+    width: 172px;
+  }
+
   .k2-vertical-grid {
     grid-template-columns: 1fr;
   }

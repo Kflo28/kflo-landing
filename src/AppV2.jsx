@@ -1,4 +1,3 @@
-import kIcon from './assets/kflo-ai-coin.webp'
 import platformHeader from './assets/kflo-ai-platform-header.webp'
 import recoveryCoin from './assets/kflo-recovery-coin.webp'
 import roofCoin from './assets/kflo-roof-coin.webp'
@@ -27,7 +26,9 @@ export default function AppV2() {
   return (
     <div className="k2-page">
       <header className="k2-nav">
-        <a className="k2-brand" href="#top"><img src={kIcon} alt=""/><span>K-FLO</span></a>
+        <a className="k2-brand k2-brand-wordmark" href="#top">
+          <img src={platformHeader} alt="K-FLO AI Operations Platform"/>
+        </a>
         <nav><a href="#recovery">Recovery</a><a href="#verticals">Platform</a><a href="#about">About</a></nav>
         <a className="k2-button k2-button-small" href={TALK_URL}>Talk With Us</a>
       </header>
@@ -75,7 +76,7 @@ export default function AppV2() {
         <section className="k2-section k2-about" id="about"><span className="k2-eyebrow">Built for the people doing the work</span><h2>K-FLO is powered by Savage & Soul.</h2><p>Built by operators, builders, and system designers who believe technology should reduce friction, strengthen accountability, and make impact visible.</p></section>
       </main>
 
-      <footer className="k2-footer"><div className="k2-brand"><img src={kIcon} alt=""/><span>K-FLO</span></div><p>Built for today. Designed for impact. Powered by Savage & Soul.</p><small>© {new Date().getFullYear()} K-FLO</small></footer>
+      <footer className="k2-footer"><div className="k2-brand k2-brand-wordmark"><img src={platformHeader} alt="K-FLO AI Operations Platform"/></div><p>Built for today. Designed for impact. Powered by Savage & Soul.</p><small>© {new Date().getFullYear()} K-FLO</small></footer>
     </div>
   )
 }
