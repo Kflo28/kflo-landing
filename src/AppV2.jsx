@@ -7,8 +7,8 @@ import commandCoin from './assets/kflo-command-coin.webp'
 import grantsCoin from './assets/kflo-grants-coin.webp'
 import './AppV2.css'
 
-const CONTACT_EMAIL = 'ryan@savageandsoul.com'
-const TALK_SUBJECT = 'K-FLO Recovery Conversation'
+const CONTACT_EMAIL = 'ryan@kflo.ai'
+const TALK_SUBJECT = 'K-FLO Platform Conversation'
 const AUDIT_SUBJECT = 'K-FLO Workflow Audit'
 
 const verticals = [
