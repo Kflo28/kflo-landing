@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import platformHeader from './assets/kflo-ai-platform-header.webp'
 import recoveryCoin from './assets/kflo-recovery-coin.webp'
-import roofCoin from './assets/kflo-roof-coin.webp'
-import coverageCoin from './assets/kflo-coverage-coin.webp'
 import behavioralHealthCoin from './assets/kflo-behavioral-health-coin.webp'
+import connectCoin from './assets/kflo-connect-coin.webp'
+import commandCoin from './assets/kflo-command-coin.webp'
+import grantsCoin from './assets/kflo-grants-coin.webp'
 import './AppV2.css'
 
 const CONTACT_EMAIL = 'ryan@savageandsoul.com'
@@ -11,14 +12,15 @@ const TALK_SUBJECT = 'K-FLO Recovery Conversation'
 const AUDIT_SUBJECT = 'K-FLO Workflow Audit'
 
 const verticals = [
-  { name: 'K-FLO Recovery', line: 'Housing • Compliance • Funding', text: 'Recovery-housing operations, resident flow, grant readiness, live oversight, and de-identified funder reporting.', href: 'https://rph.kflo.ai', color: 'blue', image: recoveryCoin, badge: 'LIVE' },
-  { name: 'K-FLO Roof', line: 'Crews • Jobs • Projects', text: 'Field execution, inspection workflows, project movement, follow-up, and team accountability.', href: 'https://roof.kflo.ai', color: 'red', image: roofCoin },
-  { name: 'K-FLO Coverage', line: 'Inspect • Document • Resolve', text: 'Insurance workflow visibility, documentation, follow-up, and cleaner resolution ownership.', href: 'https://insurance.kflo.ai', color: 'gold', image: coverageCoin },
-  { name: 'K-FLO Behavioral Health', line: 'Access • Coordinate • Place • Prove', text: 'Behavioral-health access, capacity, placement coordination, clinical workflows, programs, and de-identified oversight.', href: 'https://behavior.kflo.ai', color: 'violet', image: behavioralHealthCoin, badge: 'DEMO' },
+  { name: 'K-FLO Recovery', line: 'Operate • Document • Prove', text: 'Recovery-housing operations, resident flow, beds, compliance, funding requirements, and de-identified reporting in one system.', href: 'https://rph.kflo.ai', color: 'blue', image: recoveryCoin, badge: 'LIVE' },
+  { name: 'K-FLO BeHave', line: 'Access • Coordinate • Place • Prove', text: 'Live behavioral-health capacity, court-to-care tracking, placement coordination, program workflows, and verified follow-through.', href: 'https://behavior.kflo.ai', color: 'violet', image: behavioralHealthCoin, badge: 'DEMO' },
+  { name: 'K-FLO Connect', line: 'Beds • Visibility • Placement', text: 'A free network layer where recovery homes keep beds current, get found by referral partners, and report from the same record.', href: 'https://connect.kflo.ai', color: 'cyan', image: connectCoin, badge: 'FREE' },
+  { name: 'K-FLO Command', line: 'Oversight • Insight • Proof', text: 'Live, de-identified visibility into network capacity, compliance posture, deliverables, and outcomes across funded programs.', href: 'https://command.kflo.ai', color: 'teal', image: commandCoin },
+  { name: 'K-FLO Grant Intelligence', line: 'Find • Evaluate • Apply • Report', text: 'A developing funding workspace that connects opportunity discovery, application work, award management, and reporting.', href: 'https://grants.kflo.ai', color: 'green', image: grantsCoin, badge: 'EARLY STAGE' },
 ]
 
 const capabilities = [
-  ['Capture', 'Intake, forms, calls, uploads, resident activity, inspections, and field work enter one structured flow.'],
+  ['Capture', 'Intake, referrals, uploads, resident activity, bed updates, placements, and grant work enter one structured flow.'],
   ['Coordinate', 'K-FLO assigns ownership, status, eligibility, priority, and the next action.'],
   ['Operate', 'Teams work from role-based dashboards, queues, schedules, and documented workflows.'],
   ['Prove', 'Leaders, funders, and oversight partners see outcomes, compliance, capacity, and impact.'],
@@ -112,7 +114,7 @@ export default function AppV2() {
         </section>
 
         <section className="k2-section" id="verticals">
-          <div className="k2-section-head"><span className="k2-eyebrow">The K-FLO Platform Family</span><h2>Different missions. One execution spine.</h2><p>Recovery leads the way today. Each K-FLO vertical keeps its own vocabulary, workflows, permissions, and reporting while sharing the same operating intelligence underneath.</p></div>
+          <div className="k2-section-head"><span className="k2-eyebrow">The K-FLO Platform Family</span><h2>Different missions. One execution spine.</h2><p>Recovery, BeHave, Connect, Command, and Grant Intelligence each serve a distinct part of the mission while sharing the same operating intelligence underneath.</p></div>
           <div className="k2-vertical-grid">
             {verticals.map((v) => (
               <a className={`k2-card ${v.color}`} href={v.href} key={v.name}>
@@ -130,7 +132,7 @@ export default function AppV2() {
         </section>
 
         <section className="k2-section k2-platform" id="platform">
-          <div><span className="k2-eyebrow">The Shared Engine</span><h2>Capture the work once. Turn it into action and proof.</h2><p>From a resident check-in or grant deliverable to a roof inspection or insurance follow-up, K-FLO converts real activity into cleaner operations and decision-ready visibility.</p></div>
+          <div><span className="k2-eyebrow">The Shared Engine</span><h2>Capture the work once. Turn it into action and proof.</h2><p>From a resident check-in or bed update to a placement confirmation, grant deliverable, or oversight review, K-FLO converts real activity into cleaner operations and decision-ready visibility.</p></div>
           <div className="k2-capability-grid">{capabilities.map(([title,text],i)=><article key={title}><span>0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
         </section>
 
