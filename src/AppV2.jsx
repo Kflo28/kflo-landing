@@ -12,11 +12,11 @@ const TALK_SUBJECT = 'K-FLO Platform Conversation'
 const AUDIT_SUBJECT = 'K-FLO Workflow Audit'
 
 const verticals = [
-  { name: 'K-FLO Recovery', line: 'Operate • Document • Prove', text: 'Recovery-housing operations, resident flow, beds, compliance, funding requirements, and de-identified reporting in one system.', href: 'https://rph.kflo.ai', color: 'blue', image: recoveryCoin, badge: 'LIVE' },
-  { name: 'K-FLO BeHave', line: 'Access • Coordinate • Place • Prove', text: 'Live behavioral-health capacity, court-to-care tracking, placement coordination, program workflows, and verified follow-through.', href: 'https://behavior.kflo.ai', color: 'violet', image: behavioralHealthCoin, badge: 'DEMO' },
-  { name: 'K-FLO Connect', line: 'Beds • Visibility • Placement', text: 'A free network layer where recovery homes keep beds current, get found by referral partners, and report from the same record.', href: 'https://connect.kflo.ai', color: 'cyan', image: connectCoin, badge: 'FREE' },
-  { name: 'K-FLO Command', line: 'Oversight • Insight • Proof', text: 'Live, de-identified visibility into network capacity, compliance posture, deliverables, and outcomes across funded programs.', href: 'https://command.kflo.ai', color: 'teal', image: commandCoin },
-  { name: 'K-FLO Grant Intelligence', line: 'Find • Evaluate • Apply • Report', text: 'A developing funding workspace that connects opportunity discovery, application work, award management, and reporting.', href: 'https://grants.kflo.ai', color: 'green', image: grantsCoin, badge: 'EARLY STAGE' },
+  { name: 'K-FLO Recovery', arc: 'OPERATE', line: 'Operate • Document • Prove', text: 'Recovery-housing operations, resident flow, beds, compliance, funding requirements, and de-identified reporting in one system.', href: 'https://rph.kflo.ai', color: 'blue', image: recoveryCoin, badge: 'LIVE' },
+  { name: 'K-FLO BeHave', arc: 'PLACE', line: 'Access • Coordinate • Place • Prove', text: 'Live behavioral-health capacity, court-to-care tracking, placement coordination, program workflows, and verified follow-through.', href: 'https://behavior.kflo.ai', color: 'violet', image: behavioralHealthCoin, badge: 'DEMO' },
+  { name: 'K-FLO Connect', arc: 'CONNECT', line: 'Beds • Visibility • Placement', text: 'A free network layer where recovery homes keep beds current, get found by referral partners, and report from the same record.', href: 'https://connect.kflo.ai', color: 'cyan', image: connectCoin, badge: 'FREE' },
+  { name: 'K-FLO Command', arc: 'PROVE', line: 'Oversight • Insight • Proof', text: 'Live, de-identified visibility into network capacity, compliance posture, deliverables, and outcomes across funded programs.', href: 'https://command.kflo.ai', color: 'teal', image: commandCoin },
+  { name: 'K-FLO Grant Intelligence', arc: 'FUND', line: 'Find • Evaluate • Apply • Report', text: 'A developing funding workspace that connects opportunity discovery, application work, award management, and reporting.', href: 'https://grants.kflo.ai', color: 'green', image: grantsCoin, badge: 'EARLY STAGE' },
 ]
 
 const capabilities = [
@@ -84,7 +84,9 @@ function ContactDialog({ subject, onClose }) {
 
 export default function AppV2() {
   const [contactSubject, setContactSubject] = useState('')
+  const [activeVerticalIndex, setActiveVerticalIndex] = useState(0)
   const closeContact = () => setContactSubject('')
+  const activeVertical = verticals[activeVerticalIndex]
 
   return (
     <div className="k2-page">
@@ -105,7 +107,40 @@ export default function AppV2() {
             <div className="k2-actions"><a className="k2-button" href="https://rph.kflo.ai">Open K-FLO Recovery</a><button className="k2-button k2-button-ghost" type="button" onClick={() => setContactSubject(TALK_SUBJECT)}>Discuss a Pilot</button></div>
             <div className="k2-pills"><span>Recovery Operations</span><span>Compliance Ready</span><span>Grant Visibility</span><span>Oversight Proof</span></div>
           </div>
-          <div className="k2-hero-art"><img src={platformHeader} alt="K-FLO AI Operations Platform"/></div>
+          <div className="k2-hero-art k2-system-showcase">
+            <div className="k2-system-head">
+              <img src={platformHeader} alt="K-FLO AI Operations Platform"/>
+              <span>Explore the system</span>
+            </div>
+            <div className={`k2-system-feature ${activeVertical.color}`} key={activeVertical.name} aria-live="polite">
+              <div className="k2-system-coin-wrap">
+                <img src={activeVertical.image} alt={`${activeVertical.name} coin`}/>
+              </div>
+              <div className="k2-system-detail">
+                <span className="k2-system-stage">{activeVertical.arc} · 0{activeVerticalIndex + 1}</span>
+                <h2>{activeVertical.name}</h2>
+                <strong>{activeVertical.line}</strong>
+                <p>{activeVertical.text}</p>
+                <a href={activeVertical.href}>Open {activeVertical.name.replace('K-FLO ', '')} <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <div className="k2-arc-tabs" aria-label="Explore the K-FLO Arc">
+              {verticals.map((vertical, index) => (
+                <button
+                  className={`k2-arc-button ${index === activeVerticalIndex ? 'active' : ''}`}
+                  type="button"
+                  key={vertical.arc}
+                  aria-pressed={index === activeVerticalIndex}
+                  aria-label={`Show ${vertical.name}: ${vertical.arc.toLowerCase()}`}
+                  onClick={() => setActiveVerticalIndex(index)}
+                >
+                  <span aria-hidden="true">0{index + 1}</span>
+                  <strong>{vertical.arc}</strong>
+                </button>
+              ))}
+            </div>
+            <p className="k2-arc-caption"><span>K-FLO ARC</span> Operate → Place → Connect → Prove → Fund</p>
+          </div>
         </section>
 
         <section className="k2-section k2-bh-callout" id="recovery">
