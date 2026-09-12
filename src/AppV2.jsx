@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import platformHeader from './assets/kflo-ai-platform-header.webp'
-import recoveryCoin from './assets/kflo-recovery-coin.webp'
+import recoveryCoin from './assets/kflo-recovery-coin.png'
 import behavioralHealthCoin from './assets/kflo-behavioral-health-coin.webp'
 import connectCoin from './assets/kflo-connect-coin.webp'
 import commandCoin from './assets/kflo-command-coin.webp'

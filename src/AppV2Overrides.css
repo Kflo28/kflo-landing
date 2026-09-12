@@ -759,3 +759,11 @@
     gap: 10px;
   }
 }
+
+/* Frame the supplied landscape Recovery artwork without altering the source image. */
+.k2-system-coin-wrap img[alt="K-FLO Recovery coin"],
+.k2-card .k2-coin-stage > img[alt="K-FLO Recovery coin"],
+.k2-bh-callout > img[alt="K-FLO Recovery coin"] {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
