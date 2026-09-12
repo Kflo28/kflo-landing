@@ -14,7 +14,7 @@ const AUDIT_SUBJECT = 'K-FLO Workflow Audit'
 const verticals = [
   { name: 'K-FLO Recovery', arc: 'OPERATE', line: 'Operate • Document • Prove', text: 'Recovery-housing operations, resident flow, beds, compliance, funding requirements, and de-identified reporting in one system.', href: 'https://rph.kflo.ai', color: 'blue', image: recoveryCoin, badge: 'LIVE' },
   { name: 'K-FLO BeHave', arc: 'PLACE', line: 'Access • Coordinate • Place • Prove', text: 'Live behavioral-health capacity, court-to-care tracking, placement coordination, program workflows, and verified follow-through.', href: 'https://behavior.kflo.ai', color: 'violet', image: behavioralHealthCoin, badge: 'DEMO' },
-  { name: 'K-FLO Connect', arc: 'CONNECT', line: 'Beds • Visibility • Placement', text: 'A free network layer where recovery homes keep beds current, get found by referral partners, and report from the same record.', href: 'https://connect.kflo.ai', color: 'cyan', image: connectCoin, badge: 'FREE' },
+  { name: 'K-FLO Connect', arc: 'CONNECT', line: 'Report • Verify • Connect', text: 'The free, association-governed capacity network where approved providers keep beds current and the network sees one trusted answer.', href: 'https://connect.kflo.ai', color: 'cyan', image: connectCoin, badge: 'LIVE · FREE' },
   { name: 'K-FLO Command', arc: 'PROVE', line: 'Oversight • Insight • Proof', text: 'Live, de-identified visibility into network capacity, compliance posture, deliverables, and outcomes across funded programs.', href: 'https://command.kflo.ai', color: 'teal', image: commandCoin },
   { name: 'K-FLO Grant Intelligence', arc: 'FUND', line: 'Find • Evaluate • Apply • Report', text: 'A developing funding workspace that connects opportunity discovery, application work, award management, and reporting.', href: 'https://grants.kflo.ai', color: 'green', image: grantsCoin, badge: 'EARLY STAGE' },
 ]
@@ -94,7 +94,7 @@ export default function AppV2() {
         <a className="k2-brand k2-brand-wordmark" href="#top">
           <img src={platformHeader} alt="K-FLO AI Operations Platform"/>
         </a>
-        <nav><a href="#recovery">Recovery</a><a href="#verticals">Platform</a><a href="#about">About</a></nav>
+        <nav><a href="#recovery">Recovery</a><a href="#connect">Connect</a><a href="#verticals">Platform</a><a href="#about">About</a></nav>
         <button className="k2-button k2-button-small" type="button" onClick={() => setContactSubject(TALK_SUBJECT)}>Talk With Us</button>
       </header>
 
@@ -146,6 +146,40 @@ export default function AppV2() {
         <section className="k2-section k2-bh-callout" id="recovery">
           <img className="k2-coin" src={recoveryCoin} alt="K-FLO Recovery coin" />
           <div><span className="k2-eyebrow">Built for recovery housing</span><h2>Run the house. Prove the work. Protect the funding.</h2><p>Manage resident flow, beds, documentation, incidents, inspections, requirements, grants, and reporting in one operational system. Let the daily work create the record funders and oversight partners need.</p><div className="k2-actions"><a className="k2-button" href="https://rph.kflo.ai">Explore Recovery</a><button className="k2-button k2-button-ghost" type="button" onClick={() => setContactSubject(AUDIT_SUBJECT)}>Request a Workflow Audit</button></div></div>
+        </section>
+
+        <section className="k2-section k2-connect-spotlight" id="connect">
+          <div className="k2-connect-copy">
+            <div className="k2-connect-kicker">
+              <span className="k2-eyebrow">The free capacity network</span>
+              <span className="k2-connect-live">Live · Free</span>
+            </div>
+            <h2>Stop chasing bed counts.<br/><em>Share one trusted answer.</em></h2>
+            <p>K-FLO Connect gives approved recovery homes and association leaders one current, time-stamped capacity network. Providers maintain their own availability. The network can see what is current, what needs a fresh report, and what capacity is still upcoming.</p>
+            <div className="k2-connect-proof-grid">
+              <article><span>01</span><strong>Provider-owned</strong><p>Each home reports its own capacity from one controlled record.</p></article>
+              <article><span>02</span><strong>Trust visible</strong><p>Association status and report freshness stay clear at a glance.</p></article>
+              <article><span>03</span><strong>Privacy preserved</strong><p>Aggregate capacity only. Resident records remain at their source.</p></article>
+            </div>
+            <div className="k2-actions">
+              <a className="k2-button k2-connect-button" href="https://connect.kflo.ai">Join Free Connect</a>
+              <a className="k2-button k2-button-ghost" href="#verticals">Explore the K-FLO family</a>
+            </div>
+            <small>Free for approved providers. Network access remains association-governed. Availability never guarantees admission.</small>
+          </div>
+
+          <div className="k2-connect-visual">
+            <div className="k2-system-coin-wrap k2-connect-coin-wrap">
+              <img src={connectCoin} alt="K-FLO Connect coin"/>
+            </div>
+            <span className="k2-eyebrow">Built to scale state by state</span>
+            <h3>One current view.<br/>No resident records.</h3>
+            <div className="k2-connect-signal-list">
+              <div><span>CAPACITY</span><strong>Current, stale, or upcoming</strong></div>
+              <div><span>TRUST</span><strong>Association status stays authoritative</strong></div>
+              <div><span>ACTION</span><strong>Know exactly who needs to report</strong></div>
+            </div>
+          </div>
         </section>
 
         <section className="k2-section" id="verticals">
